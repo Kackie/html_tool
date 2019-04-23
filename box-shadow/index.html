@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>box-shadowプロパティの設定</title>
+    <link rel="stylesheet" href="css\styles.css">
+</head>
+<body>
+    <div id="app">
+        <div class="wrap">
+            <div class="adjust">
+                <table>
+                    <tr>
+                        <th>水平方向のオフセット</th>
+                        <td><input type="range" min="-20" max="20" v-model="horizontal"> <input type="text" v-model="horizontal" style="width:2em;">px</td>
+                    </tr>
+                    <tr>
+                        <th>垂直方向のオフセット</th>
+                        <td><input type="range" min="-20" max="20" v-model="vertical"> <input type="text" v-model="vertical" style="width:2em;">px</td>
+                    </tr>
+                    <tr>
+                        <th>ぼかし距離</th>
+                        <td><input type="range" min="0" max="20" v-model="blur"> <input type="text" v-model="blur" style="width:2em;">px</td>
+                    </tr>
+                    <tr>
+                        <th>広がり距離</th>
+                        <td><input type="range" min="0" max="20" v-model="spread"> <input type="text" v-model="spread" style="width:2em;">px</td>
+                    </tr>
+                    <tr>
+                        <th>色 <span style="float:right;"><label for="check1_1"><input type="checkbox" id="check1_1" v-model="color.toggle">colorCode</label></span></th>
+                        <td>
+                            <span v-if="color.toggle">
+                                <input type="color" v-model="color.code">
+                                <input type="text" v-model="color.code">
+                            </span>
+                            <span v-else>
+                                <table>
+                                    <tr>
+                                        <th>R</th>
+                                        <td><input type="range" min="0" max="255" v-model="color.r"><input type="text" style="width:3em;" v-model="color.r"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>G</th>
+                                        <td><input type="range" min="0" max="255" v-model="color.g"><input type="text" style="width:3em;" v-model="color.g"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>B</th>
+                                        <td><input type="range" min="0" max="255" v-model="color.b"><input type="text" style="width:3em;" v-model="color.b"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Alpa</th>
+                                        <td><input type="range" min="0" max="1" step="0.01" v-model="color.a"><input type="text" style="width:3em;" v-model="color.a"></td>
+                                    </tr>
+                                </table>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>inset</th>
+                        <td><label for="check1_2"><input type="checkbox" id="check1_2" v-model="inset"></label></td>
+                    </tr>
+                    <tr>
+                        <th>背景 <span style="float:right;"><label for="check1_3"><input type="checkbox" id="check1_3" v-model="bgImage.toggle">画像</label></span></th>
+                        <td>
+                            <input v-if="bgImage.toggle" type="file" accept="image/*" v-on:change="onFileChange">
+                            <span v-else><input type="color" v-model="bgColor"> <input type="text" v-model="bgColor"></span>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>CSS記述</th>
+                        <td><textarea cols="30" rows="10" v-model="targetCSSTxt"></textarea></td>
+                    </tr>
+                </table>
+            </div><!-- /.adjust -->
+            <div class="reflect" v-bind:style="[(bgImage.toggle)?{backgroundImage:'url('+bgImage.upload+')'}:{background:bgColor}]">
+                <div class="box" v-bind:style="[targetCSS,(inset)?{'box-shadow': horizontal+'px '+vertical+'px '+blur+'px '+spread+'px '+cssColor+' inset'}:{'box-shadow': horizontal+'px '+vertical+'px '+blur+'px '+spread+'px '+cssColor}]"></div>
+            </div><!-- /.reflect -->
+        </div><!-- /.wrap -->
+
+        <pre>{{$data}}</pre>
+    </div><!-- /#app -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="scripts\main.js"></script>
+</body>
+</html>

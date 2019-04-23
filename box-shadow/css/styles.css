@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+th{
+    text-align: left;
+    padding-right: 10px;
+    vertical-align: top;
+}
+.wrap{
+    display: flex;
+    padding: 30px;
+}
+.wrap .adjust{
+    border-right: 1px solid #000;
+    padding: 20px;
+    width: 400px;
+}
+.wrap .reflect{
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: none;
+    background-size: cover;
+}
+.box{
+    
+}
