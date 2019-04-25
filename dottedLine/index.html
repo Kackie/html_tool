@@ -44,21 +44,21 @@ th{
       <tr>
         <th>長さ</th>
         <td>
-          <input type="range" v-model.number="length" min="1" max="10">
+          <input type="range" v-model.number="length" min="1" max="20">
           <input type="text" v-model.number="length" style="width:2em;">px
         </td>
       </tr>
       <tr>
         <th>間隔</th>
         <td>
-          <input type="range" v-model.number="space" min="1" max="10">
+          <input type="range" v-model.number="space" min="1" max="20">
           <input type="text" v-model.number="space" style="width:2em;">px
         </td>
       </tr>
       <tr>
         <th>太さ</th>
         <td>
-          <input type="range" v-model.number="weight" min="1" max="10">
+          <input type="range" v-model.number="weight" min="1" max="20">
           <input type="text" v-model.number="weight" style="width:2em;">px
         </td>
       </tr>
@@ -100,9 +100,6 @@ var app101 = new Vue({
       space:1,
       weight:1,
       color:'#000000',
-      r:'',
-      g:'',
-      b:'',
       a:'1'
     },
     computed:{
