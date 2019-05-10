@@ -24,6 +24,10 @@ var app = new Vue({
             height: '100px',
             border: '1px solid #000',
             background:'rgba(255,255,255,0.9)'
+        },
+        targetImage:{
+            imgFlag:false,
+            upload:'images/img.png'
         }
     },
     computed: {
@@ -60,7 +64,7 @@ var app = new Vue({
             get:function(){
                 var stylesTxt = ''
                 for(key in this.targetCSS){
-                stylesTxt += key + ':' + this.targetCSS[key] + ';\n'
+                    stylesTxt += key + ':' + this.targetCSS[key] + ';\n'
                 }
                 return stylesTxt
             },
@@ -88,6 +92,18 @@ var app = new Vue({
             let reader = new FileReader();
             reader.onload = (e) => {
                 this.bgImage.upload = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
+        onFileChange2(e) {
+            let files = e.target.files || e.dataTransfer.files;
+            this.createImage2(files[0]);
+        },
+        // アップロードした画像を表示
+        createImage2(file) {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                this.targetImage.upload = e.target.result;
             };
             reader.readAsDataURL(file);
         }

@@ -35,7 +35,7 @@
                                 <input type="color" v-model="color.code">
                                 <input type="text" v-model="color.code">
                             </span>
-                            <span v-else>
+                            <div v-else>
                                 <table>
                                     <tr>
                                         <th>R</th>
@@ -54,7 +54,7 @@
                                         <td><input type="range" min="0" max="1" step="0.01" v-model="color.a"><input type="text" style="width:3em;" v-model="color.a"></td>
                                     </tr>
                                 </table>
-                            </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -70,13 +70,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>CSS記述</th>
-                        <td><textarea cols="30" rows="10" v-model="targetCSSTxt"></textarea></td>
+                        <th>CSS記述 <span style="float:right;"><label for="check1_4"><input type="checkbox" id="check1_4" v-model="targetImage.imgFlag">画像</label></span></th>
+                        <td><input type="file" v-if="targetImage.imgFlag" accept="image/*" v-on:change="onFileChange2">
+                            <div v-else>
+                                <textarea cols="30" rows="10" v-model="targetCSSTxt"></textarea>
+                            </div>
+                        </td>
                     </tr>
                 </table>
             </div><!-- /.adjust -->
             <div class="reflect" v-bind:style="[(bgImage.toggle)?{backgroundImage:'url('+bgImage.upload+')'}:{background:bgColor}]">
-                <div class="box" v-bind:style="[targetCSS,(inset)?{'box-shadow': horizontal+'px '+vertical+'px '+blur+'px '+spread+'px '+cssColor+' inset'}:{'box-shadow': horizontal+'px '+vertical+'px '+blur+'px '+spread+'px '+cssColor}]"></div>
+                <div class="box" v-bind:style="[(targetImage.imgFlag)?{}:targetCSS,(inset)?{'box-shadow': horizontal+'px '+vertical+'px '+blur+'px '+spread+'px '+cssColor+' inset'}:{'box-shadow': horizontal+'px '+vertical+'px '+blur+'px '+spread+'px '+cssColor}]"><img v-show="targetImage.imgFlag" v-bind:src="targetImage.upload" alt=""></div>
             </div><!-- /.reflect -->
         </div><!-- /.wrap -->
 
