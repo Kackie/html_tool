@@ -83,7 +83,7 @@
                 <div class="box" v-bind:style="[(targetImage.imgFlag)?{}:targetCSS,(inset)?{'box-shadow': horizontal+'px '+vertical+'px '+blur+'px '+spread+'px '+cssColor+' inset'}:{'box-shadow': horizontal+'px '+vertical+'px '+blur+'px '+spread+'px '+cssColor}]"><img v-show="targetImage.imgFlag" v-bind:src="targetImage.upload" alt=""></div>
             </div><!-- /.reflect -->
         </div><!-- /.wrap -->
-
+        <pre>box-shadow:rgba({{color.r}}, {{color.g}}, {{color.b}}, {{color.a}}) {{horizontal}}px {{vertical}}px {{blur}}px {{spread}}px;</pre>
         <pre>{{$data}}</pre>
     </div><!-- /#app -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
