@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>キーコード取得</title>
+<style>
+[v-cloak] {
+  display: none;
+}
+th,td{
+  border: 1px solid #000;
+}
+</style>
+</head>
+<body>
+
+<div id="app" v-cloak>
+<p><input type="text" v-on:keyup="getKeycode" v-on:keydown="getKeycode" placeholder="キー入力"></p>
+<table>
+  <tr>
+    <th>event</th>
+    <th>key</th>
+    <th>keyCode</th>
+    <th>shiftKey</th>
+    <th>ctrlKey</th>
+    <th>altKey</th>
+  </tr>
+  <tr>
+    <th>keyup</th>
+    <td>{{keyup.key}}</td>
+    <td>{{keyup.code}}</td>
+    <td>{{keyup.shift}}</td>
+    <td>{{keyup.ctrl}}</td>
+    <td>{{keyup.alt}}</td>
+  </tr>
+  <tr>
+    <th>keydown</th>
+    <td>{{keydown.key}}</td>
+    <td>{{keydown.code}}</td>
+    <td>{{keydown.shift}}</td>
+    <td>{{keydown.ctrl}}</td>
+    <td>{{keydown.alt}}</td>
+  </tr>
+</table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+var app = new Vue({
+  el:'#app',
+  data:{
+    keyup:{
+      key:'',
+      code:'',
+      shift:false,
+      ctrl:false,
+      alt:false
+    },
+    keydown:{
+      key:'',
+      code:'',
+      shift:false,
+      ctrl:false,
+      alt:false
+    }
+  },
+  methods:{
+    getKeycode:function(e){
+      this.keyup.key = ''
+      this.keyup.code = ''
+      this.keyup.shift = false
+      this.keyup.ctrl = false
+      this.keyup.alt = false
+      if(e.type === 'keyup'){
+        this.keyup.key = e.key
+        this.keyup.code = e.keyCode
+        this.keyup.shift = e.shiftKey
+        this.keyup.ctrl = e.ctrlKey
+        this.keyup.alt = e.altKey
+      }else{
+        this.keydown.key = e.key
+        this.keydown.code = e.keyCode
+        this.keydown.shift = e.shiftKey
+        this.keydown.ctrl = e.ctrlKey
+        this.keydown.alt = e.altKey
+      }
+      
+      e.preventDefault();
+    }
+  }
+})
+</script>
+</body>
+</html>
