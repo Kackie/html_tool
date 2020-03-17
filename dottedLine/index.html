@@ -30,9 +30,6 @@ th{
     padding-right: 10px;
     vertical-align: top;
 }
-.line{
-  width: 100%;
-}
 </style>
 </head>
 <body>
@@ -76,17 +73,33 @@ th{
           <input type="text" v-model="a" style="width:2em;">
         </td>
       </tr>
+      <tr>
+        <th>縦</th>
+        <td>
+          <input type="checkbox" v-model="vertical">
+        </td>
+      </tr>
     </table>
   </div>
   <div class="reflect">
-    <p class="line" v-bind:style="{'background-image':'linear-gradient(to right, rgba('+rgbValue+','+a+'), rgba('+rgbValue+','+a+') '+ratio+'%, rgba(0, 0, 0, 0) '+ratio+'%, rgba(0, 0, 0, 0) 100%)',height:weight+'px','background-size':length+space+'px '+weight+'px'}"></p>
+    <p v-show="!vertical" class="line" v-bind:style="{'background-image':'linear-gradient(to right, rgba('+rgbValue+','+a+'), rgba('+rgbValue+','+a+') '+ratio+'%, rgba(0, 0, 0, 0) '+ratio+'%, rgba(0, 0, 0, 0) 100%)',height:weight+'px',width:'100%','background-size':length+space+'px '+weight+'px'}"></p>
+    <p v-show="vertical" class="line" v-bind:style="{'background-image':'linear-gradient(to bottom, rgba('+rgbValue+','+a+'), rgba('+rgbValue+','+a+') '+ratio+'%, rgba(0, 0, 0, 0) '+ratio+'%, rgba(0, 0, 0, 0) 100%)',width:weight+'px',height:'100%','background-size':weight+'px '+(length+space)+'px'}"></p>
   </div>
 </div>
-<pre>
+<pre v-show="!vertical">
 .elm{
   background:linear-gradient(to right, rgba({{rgbValue}},{{a}}), rgba({{rgbValue}},{{a}}) {{ratio}}%, rgba(0, 0, 0, 0) {{ratio}}%, rgba(0, 0, 0, 0) 100%) 0% 0%;
   background-size:{{length+space}}px {{weight}}px;
+  width: 100%;
   height: {{weight}}px;
+}
+</pre>
+<pre v-show="vertical">
+.elm{
+  background:linear-gradient(to bottom, rgba({{rgbValue}},{{a}}), rgba({{rgbValue}},{{a}}) {{ratio}}%, rgba(0, 0, 0, 0) {{ratio}}%, rgba(0, 0, 0, 0) 100%) 0% 0%;
+  background-size:{{weight}}px {{length+space}}px;
+  width: {{weight}}px;
+  height: 100%;
 }
 </pre>
 </div>
@@ -100,7 +113,8 @@ var app101 = new Vue({
       space:1,
       weight:1,
       color:'#000000',
-      a:'1'
+      a:'1',
+      vertical:false
     },
     computed:{
       ratio:function(){
